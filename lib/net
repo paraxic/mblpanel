@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+#
+# Author: paraxic <paraxic@outlook.com>
+# Version: 1.00
+# Date:  09/10/2018
+# Updated: 09/10/2018
+# Desc: Net Module for MBLpanel
+
+source ~/.mbl_panel/lib/common
+
+IP_COLOR='ff22aa'
+
+print_ip(){
+IP=`ip addr | grep wlp2s0 | grep inet | cut -c 10-22`
+hilight fg $1 "$IP"
+}
+

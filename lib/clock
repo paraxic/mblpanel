@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# Author: paraxic
+# Version: 1.00 
+# Date: 09/11/2018
+#
+# Desc: clock module
+
+#stat vars
+function clock() {
+	TIME=$(date +"%r")
+	DATE=$(date +"%D")
+	echo -n "$DATE $TIME"
+}

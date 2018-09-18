@@ -1,0 +1,48 @@
+#!/usr/bin/bash
+#
+# Author: paraxic <paraxic@outlook.com>
+# Version: 1.00
+# Date:    09/10/2018
+# Updated: 09/10/2018
+# Desc: The [m]odular [b]ash [l]emonbar panel
+
+# config
+FG_COLOR=ffffff
+BG_COLOR='222222'
+#unused
+#HI_COLOR=
+IP_COLOR=ffcc00
+CDESK_COLOR=ccff00
+#unused
+#DATE_COLOR=
+#unused
+#TIME_COLOR=
+
+# mbl panel "Main"
+
+#load modules
+source ~/.mbl_panel/lib/common
+source ~/.mbl_panel/lib/clock
+source ~/.mbl_panel/lib/bspwm
+source ~/.mbl_panel/lib/net
+
+#preloop functions
+
+get_desk_by_name
+
+#main loop 
+
+while true; do
+	get_current_desktop
+	#set_color bg $BG_COLOR
+	echo -n "%{l}"
+	print_desk_v2
+	color_reset 
+	echo -n "%{c}"
+	print_ip $IP_COLOR
+	echo -n "%{r}"
+	clock
+	color_reset 
+	echo
+	sleep 1
+done

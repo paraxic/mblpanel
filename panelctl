@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ $1 == "-s" ]]
+then
+	echo "starting panel"
+	echo "DIR: `pwd`"
+	exec $(pwd)/mblpanel | lemonbar -d &> ./panel_log &
+else
+	echo "Killing panel"
+	killall mblpanel >> ./panel_log
+	killall lemonbar >> ./panel_log
+fi

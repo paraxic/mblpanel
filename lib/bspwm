@@ -1,0 +1,47 @@
+#!/bin/bash
+#
+# Author: paraxic <paraxic@outlook.com>
+# Version: 1.00 
+# Date: 02/04/2017
+# Updated: 09/10/2018
+# Desc: [BSPWM] module for mblpanel
+source ~/.mbl_panel/lib/common
+
+#bspwm vars
+current_desktop=
+workspaces=
+desk_hilight="FFAA00"
+function get_desk_by_name(){
+	workspaces=$(cat ~/.config/bspwm/bspwmrc | \
+	grep monitor | \
+	sed -e "s/#.*//" -e "s/'//g" | \
+	cut -d " " -f5- | \
+	sed -e "s| |\n|g")
+}
+
+function get_current_desktop(){
+	cbsp=$(bspc query -D -d) #bspc format
+	for desk in $workspaces
+	do
+	  cmbsp=$(bspc query -D -d $desk)
+	  if [[ $cbsp == $cmbsp ]]
+	  then
+		current_desk=$desk
+		break
+	  fi
+	done
+}
+
+function print_desk_v2(){
+	for desk in $workspaces
+	do
+	  if [[ $desk == $current_desk ]]
+	  then
+		hilight fg $desk_hilight $desk
+		echo -n " "
+	  else
+	  	echo -n $desk
+		echo -n " "
+	  fi
+	done
+}

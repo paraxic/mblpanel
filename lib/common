@@ -1,0 +1,49 @@
+#!/bin/bash
+#
+# Author: paraxic
+# Version: 1.00
+# Date: 09/09/18
+#
+# Desc: Common variables and functions for panel
+
+function color_reset() {
+ if [[ $1 == "fg" ]]
+ then
+  echo -n "%{F-}"
+ fi
+ if [[ $1 == "bg" ]]
+ then
+  echo -n "%{B-}"
+ fi
+ if [[ -z $1 ]]
+ then
+  echo -n "%{F-}%{B-}"
+ fi
+}
+
+function set_color() {
+ if [[ $1 == "bg" ]]
+ then
+     echo -n "%{B#"
+ fi
+ if [[ $1 == "fg" ]]
+ then
+     echo -n "%{F#"
+ fi
+ echo -n "$2"
+ echo -n "}"
+} 
+
+function hilight() {
+	set_color $1 $2
+	echo -n "$3"
+	if [[ $1 == "fg" ]]
+	then
+	  echo -n "%{F-}"
+	fi
+	if [[ $1 == "bg" ]]
+	then
+	  echo -n "%{B-}"
+	fi
+}
+
