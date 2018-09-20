@@ -1,9 +1,9 @@
 #!/bin/bash
 #
 # Author: paraxic
-# Version: 1.00
+# Version: 1.01
 # Date: 09/09/18
-#
+# Updated: 09/19/18
 # Desc: Common variables and functions for panel
 
 function color_reset() {
@@ -35,6 +35,11 @@ function set_color() {
 } 
 
 function hilight() {
+ # DEV NOTE
+ # ALWAYS ALWAYS ALWAYS USE QUOTES FOR ARG $3
+ # IN THE CALL
+ # Example
+ #    hilight <fg_or_bg> <hex_color> "<var_or_arg>"
 	set_color $1 $2
 	echo -n "$3"
 	if [[ $1 == "fg" ]]

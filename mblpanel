@@ -1,14 +1,15 @@
 #!/usr/bin/bash
 #
 # Author: paraxic <paraxic@outlook.com>
-# Version: 1.00
+# Version: 1.01
 # Date:    09/10/2018
-# Updated: 09/10/2018
+# Updated: 09/19/2018
 # Desc: The [m]odular [b]ash [l]emonbar panel
 
 # config
 FG_COLOR=ffffff
 BG_COLOR='222222'
+WIFI_DEV="wlp2s0"
 #unused
 #HI_COLOR=
 IP_COLOR=ffcc00
@@ -21,10 +22,10 @@ CDESK_COLOR=ccff00
 # mbl panel "Main"
 
 #load modules
-source ~/.mbl_panel/lib/common
-source ~/.mbl_panel/lib/clock
-source ~/.mbl_panel/lib/bspwm
-source ~/.mbl_panel/lib/net
+source ./lib/common
+source ./lib/clock
+source ./lib/bspwm
+source ./lib/net
 
 #preloop functions
 
@@ -39,6 +40,8 @@ while true; do
 	print_desk_v2
 	color_reset 
 	echo -n "%{c}"
+	print_ssid $WIFI_DEV $IP_COLOR
+	echo -n " @ "
 	print_ip $IP_COLOR
 	echo -n "%{r}"
 	clock

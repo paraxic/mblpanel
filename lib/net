@@ -1,17 +1,29 @@
 #!/usr/bin/bash
 #
 # Author: paraxic <paraxic@outlook.com>
-# Version: 1.00
+# Version: 1.01
 # Date:  09/10/2018
-# Updated: 09/10/2018
+# Updated: 09/19/2018
 # Desc: Net Module for MBLpanel
 
-source ~/.mbl_panel/lib/common
+source ./lib/common
 
 IP_COLOR='ff22aa'
 
-print_ip(){
+function print_ip(){
 IP=`ip addr | grep wlp2s0 | grep inet | cut -c 10-22`
 hilight fg $1 "$IP"
 }
 
+function print_ssid(){
+ # QUOTES ARE MANDATORY FOR the 3rd argument of hilight
+ # without quotes you will wind up with only the first
+ # of a series of words.
+ # Example without quotes
+ #	hilight fg <hex_color> Two Words
+ #	<output>: %{F<hex_color>}Two%{F-}
+ #	<expected>: %{F<hex_color>}Two Words%{F-}
+ #	<fix>: hilight fg <hex_color> "<Argument_or_Var>"
+ SSID=$(iw dev $1 link | grep SSID | sed -e "s|\tSSID: ||" | tr -d "\n")
+ hilight fg $2 "$SSID"
+} 

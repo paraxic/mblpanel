@@ -5,7 +5,7 @@
 # Date: 02/04/2017
 # Updated: 09/10/2018
 # Desc: [BSPWM] module for mblpanel
-source ~/.mbl_panel/lib/common
+source ./lib/common
 
 #bspwm vars
 current_desktop=
