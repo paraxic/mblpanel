@@ -2,7 +2,7 @@
 
 # Usage: ./bump.sh <version>
 # Tip: Use quotes
-files=( "./lib/common" "./lib/clock" "./lib/bspwm" "./lib/net" "./mblpanel")
+files=( "./lib/common" "./lib/clock" "./lib/bspwm" "./lib/net" "./mblpanel" "./lib/battery" )
 for _file_ in ${files[@]}
  do
   echo $_file_

@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 #
 # Author: paraxic <paraxic@outlook.com>
-# Version: 1.01
+# Version: 1.10
 # Date:    09/10/2018
 # Updated: 09/19/2018
 # Desc: The [m]odular [b]ash [l]emonbar panel
@@ -10,6 +10,9 @@
 FG_COLOR=ffffff
 BG_COLOR='222222'
 WIFI_DEV="wlp2s0"
+bat_good="00ff00"
+bat_alert="ffff00"
+bat_term="ff0000"
 #unused
 #HI_COLOR=
 IP_COLOR=ffcc00
@@ -22,6 +25,7 @@ CDESK_COLOR=ccff00
 # mbl panel "Main"
 
 #load modules
+source ./lib/battery
 source ./lib/common
 source ./lib/clock
 source ./lib/bspwm
@@ -44,6 +48,9 @@ while true; do
 	echo -n " @ "
 	print_ip $IP_COLOR
 	echo -n "%{r}"
+	get_battery_charge
+	print_bat
+	color_reset
 	clock
 	color_reset 
 	echo
