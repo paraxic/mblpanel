@@ -1,9 +1,9 @@
 #!/bin/bash
 #
 # Author: paraxic <paraxic@outlook.com>
-# Version: 1.10
+# Version: 1.11
 # Date:   09/30/18
-# Updated: <null>
+# Updated: 10/15/18
 # Desc: Retrieve battery status
 BAT_PER=
 source ./lib/common
@@ -13,16 +13,18 @@ function get_battery_charge(){
 
 function print_bat(){
 	echo -n "Bat: "
-	if [[ $(expr $BAT_PER ">" 50) == 1 ]]
+	if [[ $(expr "$BAT_PER" ">" 50) == 1 ]]
 	then
-	    hilight fg "$bat_good" "$BAT_PER% "
+		hilight "$bat_good" "$BAT_PER%"
+	else
+	 if [[ $(expr "$BAT_PER" "<=" 50) == 1 && $(expr "$BAT_PER" ">" 25) == 1 ]]
+	 then
+		hilight "$bat_alert" "$BAT_PER%"
+	 fi
+	 if [[ $(expr "$BAT_PER" "<=" 25) == 1 ]]
+	 then
+	 	hilight "$bat_term" "$BAT_PER%"
+	 fi
 	fi
-	if [[ $(expr $BAT_PER "<=" 50) == 1 ]]
-	then
-	   hilight fg "$bat_alert" "$BAT_PER% "
-	fi
-	if [[ $(expr $BAT_PER "<=" 25) == 1 ]]
-	then
-	   hilight fg "$bat_term" "$BAT_PER% "
-	fi
+	
 }
