@@ -15,15 +15,15 @@ function print_bat(){
 	echo -n "Bat: "
 	if [[ $(expr "$BAT_PER" ">" 50) == 1 ]]
 	then
-		hilight "$bat_good" "$BAT_PER%"
+		hilight "fg" "$bat_good" "$BAT_PER% "
 	else
 	 if [[ $(expr "$BAT_PER" "<=" 50) == 1 && $(expr "$BAT_PER" ">" 25) == 1 ]]
 	 then
-		hilight "$bat_alert" "$BAT_PER%"
+		hilight "fg" "$bat_alert" "$BAT_PER% "
 	 fi
 	 if [[ $(expr "$BAT_PER" "<=" 25) == 1 ]]
 	 then
-	 	hilight "$bat_term" "$BAT_PER%"
+	 	hilight "fg" "$bat_term" "$BAT_PER% "
 	 fi
 	fi
 	
