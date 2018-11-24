@@ -6,13 +6,23 @@
 # Updated: 10/15/18
 # Desc: Retrieve battery status
 BAT_PER=
+BAT_CHG=
 source ./lib/common
 function get_battery_charge(){
  BAT_PER=$(acpi | sed -e "s/^.*g, //" -e "s/%, .*//")
+ BAT_CHG=$(acpi | sed -re "s/Battery 0: (.+)/\1/" -e 's/,.*//')
 }
 
 function print_bat(){
-	echo -n "Bat: "
+	if [[ $BAT_CHG != "Charging" ]]
+	then
+	    echo -n "Bat[D]: "
+	else
+		if [[ $BAT_CHG == "Charging" ]]
+		then
+		    echo -n "Bat[C]: "
+		fi
+	fi
 	if [[ $(expr "$BAT_PER" ">" 50) == 1 ]]
 	then
 		hilight "fg" "$bat_good" "$BAT_PER% "
